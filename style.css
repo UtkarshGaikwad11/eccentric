@@ -753,9 +753,13 @@
       margin-bottom: 0; /* optional: remove gap after last item */
     }
 
-    .footer-sec{
-      
-    }
+       /* @media (max-width:768px) {
+      .lastfoot{
+        justify-content: center;
+        text-align: center;
+      }
+    } */
+
 
 
     

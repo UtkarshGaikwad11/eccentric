@@ -83,9 +83,14 @@
   } */
    
   .service-icon{
-    padding-top:80px ;
-    
-  }
+    padding-top:80px ;  }
+
+   @media (max-width:768px) {
+      .service-icon{
+        padding-top: 36px;
+      }
+    } 
+
 
   .service-icon img {
     width: 48px;
@@ -99,6 +104,13 @@
     color: rgba(33, 40, 119, 1);
     margin-top: 12px;
   }
+
+  
+   @media (max-width:768px) {
+      .service-title{
+        margin-top: 0px;
+      }
+    } 
 
   .service-desc {
     font-size:16px ;
@@ -115,6 +127,13 @@
     text-decoration: none;
 
   }
+
+   
+   @media (max-width:768px) {
+      .service-link{
+        padding-bottom: none;
+      }
+    } 
 
   .bg-blush { background: linear-gradient(180deg, rgba(255, 241, 239, 1), rgba(255, 255, 255, 1));
     backdrop-filter: blur(10px); }
@@ -490,6 +509,7 @@
         border: none;
         color: rgba(127, 104, 255, 1);
         font-size: 24px;
+        padding-right: 5px;
       }
       
       .play-btn:hover {
@@ -514,7 +534,47 @@
 
       .audio-time{
         color: rgba(73, 73, 73, 1);
+        font-size: 0.85rem;
       }
+
+
+
+.audio-time {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px; 
+  
+}
+
+@media (max-width:768px) {
+  .audio-time{
+    white-space: nowrap;
+    
+  }
+}
+
+@media (max-width:768px) {
+  .play-btn{
+    padding-right: 7px;
+    
+  }
+}
+
+.vol-section{
+
+}
+
+@media (max-width:768px) {
+  .vol-section{
+   margin-left: 10px;
+  }
+}
+
+    
+
+
+
   
     
              /* Section 7 */
@@ -649,8 +709,7 @@
         border-radius: 2rem;
         position: relative;
         overflow: hidden;
-        margin-top: 120px;
-        margin-bottom: 120px;
+        
         margin-left: 10px;
         margin-right: 10px;
       }
@@ -685,8 +744,18 @@
 }
 
 .letter-spacing-n3 { letter-spacing: -3px; }
+ 
+.hero-section h1{
+  font-size: 60px;
+  font-weight: 500;
+}
 
-      
+ @media (max-width:768px) {
+      .hero-section h1{
+        font-size: 54px;
+      }
+    } 
+
 
 
       /* Section 10 */

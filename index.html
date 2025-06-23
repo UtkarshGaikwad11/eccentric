@@ -494,8 +494,10 @@
                 <div class="col-lg-6">
                   <!-- Card 1 -->
                   <div class="audio-card mb-4 p-3 flex-wrap  rounded-3">
-                    <h6>Sample Inbound Healthcare Call</h6>
-                    <small>with Plura</small>
+                    
+                    <h6 class="">Sample Inbound Healthcare Call</h6>
+                    <small class="">with Plura</small>
+                    
             
                     <div class="audio-player d-flex align-items-center flex-wrap mt-2">
                       <button class="play-btn "><i class="bi bi-play-circle-fill "></i></button>
@@ -1040,16 +1042,32 @@
 
 <!-- Audio Cards -->
 <script>
-  document.querySelectorAll('.audio-card').forEach(card => {
+  const allAudioCards = document.querySelectorAll('.audio-card');
+
+  allAudioCards.forEach(card => {
     const audio = card.querySelector('.audio-file');
     const playBtn = card.querySelector('.play-btn');
     const progress = card.querySelector('.progress-range');
     const timeDisplay = card.querySelector('.audio-time');
     const volumeIcon = card.querySelector('.volume-icon');
     const volumeRange = card.querySelector('.volume-range');
-    
+    const volSection = card.querySelector('.vol-section');
+
+    // Set initial progress background
+    progress.style.background = `linear-gradient(to right, rgba(127, 104, 255, 1) 0%, #ddd 0%)`;
 
     playBtn.addEventListener('click', () => {
+      // Pause all other audios
+      allAudioCards.forEach(otherCard => {
+        const otherAudio = otherCard.querySelector('.audio-file');
+        const otherPlayBtn = otherCard.querySelector('.play-btn');
+        if (otherAudio !== audio) {
+          otherAudio.pause();
+          otherPlayBtn.innerHTML = '<i class="bi bi-play-circle-fill"></i>';
+        }
+      });
+
+      // Play or pause current audio
       if (audio.paused) {
         audio.play();
         playBtn.innerHTML = '<i class="bi bi-pause-circle-fill"></i>';
@@ -1062,24 +1080,32 @@
     audio.addEventListener('timeupdate', () => {
       const current = audio.currentTime;
       const duration = audio.duration;
-      progress.value = (current / duration) * 100;
+      const percentage = (current / duration) * 100;
+      progress.value = percentage;
       timeDisplay.textContent = formatTime(current) + " / " + formatTime(duration);
+      progress.style.background = `linear-gradient(to right, rgba(127, 104, 255, 1) 0%, rgba(127, 104, 255, 1) ${percentage}%, #ddd ${percentage}%, #ddd 100%)`;
     });
 
     progress.addEventListener('input', () => {
-      audio.currentTime = (progress.value / 100) * audio.duration;
+      const value = progress.value;
+      audio.currentTime = (value / 100) * audio.duration;
+      progress.style.background = `linear-gradient(to right, rgba(127, 104, 255, 1) 0%, rgba(127, 104, 255, 1) ${value}%, #ddd ${value}%, #ddd 100%)`;
     });
 
     volumeIcon.addEventListener('click', () => {
-      
-      // Toggle the visibility of the volume slider
-      volumeRange.style.display = volumeRange.style.display === 'none' ? 'inline-block' : 'none';
+      const isVisible = volumeRange.style.display === 'none';
+      volumeRange.style.display = isVisible ? 'inline-block' : 'none';
+
+      if (isVisible && window.innerWidth <= 576) {
+        volSection.classList.add('volume-visible');
+      } else {
+        volSection.classList.remove('volume-visible');
+      }
     });
 
     volumeRange.addEventListener('input', () => {
       audio.volume = volumeRange.value;
     });
-    
 
     function formatTime(sec) {
       const m = Math.floor(sec / 60);

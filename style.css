@@ -567,7 +567,7 @@
 
 @media (max-width:768px) {
   .vol-section{
-   margin-left: 10px;
+   /* margin-left: 10px; */
   }
 }
 

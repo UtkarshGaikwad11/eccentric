@@ -1071,6 +1071,7 @@
     });
 
     volumeIcon.addEventListener('click', () => {
+      
       // Toggle the visibility of the volume slider
       volumeRange.style.display = volumeRange.style.display === 'none' ? 'inline-block' : 'none';
     });
@@ -1078,6 +1079,7 @@
     volumeRange.addEventListener('input', () => {
       audio.volume = volumeRange.value;
     });
+    
 
     function formatTime(sec) {
       const m = Math.floor(sec / 60);
